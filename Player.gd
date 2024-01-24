@@ -16,10 +16,13 @@ var interactDist : int = 70
 
 var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
+var facingDir2 : Vector2 = Vector2()
+var facingAngleDeg : int = 0;
 
 onready var rayCast = get_node("RayCast2D")
 onready var anim = get_node("AnimatedSprite")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI")
+onready var weaponManager = get_node("WeaponManager")
 
 func _ready ():
 	ui.update_level_text(curLevel)
@@ -27,11 +30,14 @@ func _ready ():
 	ui.update_xp_bar(curXp, xpToNextLevel)
 	ui.update_gold_text(gold)
 	
+	
 
 func _physics_process (delta):
-	
 	vel = Vector2()
-	
+	facingDir2 = get_global_mouse_position()
+	var facing_angle_rad = atan2(position.y - get_global_mouse_position().y, 
+		position.x - get_global_mouse_position().x)
+	facingAngleDeg = int((rad2deg(facing_angle_rad)) + 360) % 360
 	#inputs
 	if Input.is_action_pressed("move_up"):
 		vel.y -= 1
@@ -55,24 +61,31 @@ func _physics_process (delta):
 	manage_animations()
 
 func manage_animations ():
-	if vel.x > 0:
-		play_animation("MoveRight")
-	elif vel.x < 0:
-		play_animation("MoveLeft")
-	elif vel.y > 0:
-		play_animation("MoveDown")
-	elif vel.y < 0:
-		play_animation("MoveUp")
-	elif facingDir.x == 1:
-		play_animation("IdleRight")
-	elif facingDir.x == -1:
-		play_animation("IdleLeft")
-	elif facingDir.y == 1:
-		play_animation("IdleDown")
-	elif facingDir.y == -1:
-		play_animation("IdleUp")
-		
+	if facingAngleDeg >= 315 || facingAngleDeg <= 45:
+		if (vel.x == 0 && vel.y == 0):
+			play_animation("IdleLeft")
+		else:
+			play_animation("MoveLeft")
+	elif facingAngleDeg > 45 && facingAngleDeg <= 135:
+		if (vel.x == 0 && vel.y == 0):
+			play_animation("IdleUp")
+		else:
+			play_animation("MoveUp")
+	elif facingAngleDeg > 135 && facingAngleDeg <= 225:
+		if (vel.x == 0 && vel.y == 0):
+			play_animation("IdleRight")
+		else:
+			play_animation("MoveRight")
+	elif facingAngleDeg > 225 && facingAngleDeg < 315:
+		if (vel.x == 0 && vel.y == 0):
+			play_animation("IdleDown")
+		else:
+			play_animation("MoveDown")
 
+func _input (event):
+	if event.is_action_pressed("attack"):
+		weaponManager.attack()
+	
 func _process (delta):
 	if Input.is_action_just_pressed("interact"):
 		try_interact()
