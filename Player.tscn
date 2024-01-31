@@ -59,9 +59,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 21.0
-height = 10.0
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 14.5699, 13.4212 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -72,7 +71,9 @@ animation = "IdleDown"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 4.76837e-07, -2.38419e-07 )
+rotation = -0.00826689
+shape = SubResource( 3 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -82,3 +83,12 @@ rotation = -4.7718
 script = ExtResource( 16 )
 
 [node name="Knife" parent="WeaponManager" instance=ExtResource( 14 )]
+position = Vector2( 9.44797, 9.57788 )
+rotation = 0.0541052
+
+[node name="CollisionShape2D" parent="WeaponManager/Knife/HitboxComponent" index="0"]
+rotation = 0.0
+disabled = true
+
+[editable path="WeaponManager/Knife"]
+[editable path="WeaponManager/Knife/HitboxComponent"]

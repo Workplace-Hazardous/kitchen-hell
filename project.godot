@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "HitboxComponent",
+"language": "GDScript",
+"path": "res://Components/HitboxComponent.gd"
+}, {
+"base": "Area2D",
+"class": "HurtboxComponent",
+"language": "GDScript",
+"path": "res://Components/HurtboxComponent.gd"
+}, {
 "base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
+"HitboxComponent": "",
+"HurtboxComponent": "",
 "Weapon": ""
 }
 

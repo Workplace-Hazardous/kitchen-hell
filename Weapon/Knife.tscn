@@ -90,11 +90,18 @@ animations = [ {
 position = Vector2( -1, -7 )
 
 [node name="AnimatedSprite" parent="." index="0"]
-rotation = 3.14159
+rotation = 3.13818
 frames = SubResource( 1 )
 animation = "attack"
+frame = 14
 
 [node name="AttackCooldown" parent="." index="1"]
 wait_time = 0.408
 
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2( 32, -9 )
+rotation = -0.0202856
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+[editable path="HitboxComponent"]

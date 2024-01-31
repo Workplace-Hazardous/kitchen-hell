@@ -35,6 +35,7 @@ func _on_Timer_timeout():
 		target.take_damage(damage)
 		
 func take_damage (dmgToTake):
+	print("Enemy taking damage")
 	curHp -= dmgToTake
 	if curHp <= 0:
 		die()
