@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddobha1trr1hs"]
+
+[ext_resource type="PackedScene" uid="uid://cb64tsntbkhjk" path="res://items/collectable.tscn" id="1_4txef"]
+[ext_resource type="Texture2D" uid="uid://dctgtpa2ts2cm" path="res://art/knife.png" id="2_01jc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4t8y6"]
+resource_local_to_scene = true
+size = Vector2(4, 14)
+
+[node name="Knife" instance=ExtResource("1_4txef")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_4t8y6")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_01jc8")
